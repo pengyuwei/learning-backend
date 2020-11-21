@@ -1,7 +1,6 @@
 package main
 import "fmt"
 
-
 // deadlock example
 // fatal error: all goroutines are asleep - deadlock!
  func main() {
