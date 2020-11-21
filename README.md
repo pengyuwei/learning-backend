@@ -20,6 +20,10 @@ go run xxxx.go
 
 # 参考文档
 
+语言基础
+- https://www.runoob.com/go/go-tutorial.html
+- http://c.biancheng.net/view/61.html
+
 Redis
 - https://github.com/go-redis/redis
 - https://www.runoob.com/redis/redis-tutorial.html
