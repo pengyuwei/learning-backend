@@ -24,6 +24,9 @@ go run xxxx.go
 - https://www.runoob.com/go/go-tutorial.html
 - http://c.biancheng.net/view/61.html
 
+MySQL
+- https://gorm.io/zh_CN/docs/index.html
+
 Redis
 - https://github.com/go-redis/redis
 - https://www.runoob.com/redis/redis-tutorial.html
