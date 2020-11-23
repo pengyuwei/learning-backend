@@ -21,8 +21,10 @@ go run xxxx.go
 # 参考文档
 
 语言基础
+- 《Go语言入门经典》
 - https://www.runoob.com/go/go-tutorial.html
 - http://c.biancheng.net/view/61.html
+- https://www.runoob.com/go/go-structures.html
 
 MySQL
 - https://gorm.io/zh_CN/docs/index.html
