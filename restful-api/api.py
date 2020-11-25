@@ -7,32 +7,6 @@ from flask_cors import CORS
 import logging
 #from flask.ext.httpauth import HTTPBasicAuth
 
-# pip install flask
-# pip install flask-cors
-# pip install pyOpenSSL
-# pip install Flask-SSLify
-
-"""
-visit API:
-登录（POST）
-curl -d "user=test&passwd=test" http://127.0.0.1:8081/api/v1.0/get_token
-
-获取全部对象列表（GET）
-curl "http://127.0.0.1:8081/api/v1.0/objects?token=ABCDEF0123456789"
-
-获取第一个对象的详细信息（GET）
-curl "http://127.0.0.1:8081/api/v1.0/objects/1?token=ABCDEF0123456789"
-
-添加一个对象（POST）
-curl -X POST -H 'Content-Type: application/json' -d '{"title":"davidwalsh","description":"something"}' 'http://127.0.0.1:8081/api/v1.0/objects?token=ABCDEF0123456789'
-
-修改这个对象的信息（PUT）
-curl -X PUT -H 'Content-Type: application/json' -d '{"title":"davidwalsh","description":"something"}' 'http://127.0.0.1:8081/api/v1.0/objects/1?token=ABCDEF0123456789'
-
-删除这个对象（DELETE）
-curl -X DELETE "http://127.0.0.1:8081/api/v1.0/objects/1?token=ABCDEF0123456789"
-"""
-
 app = Flask(__name__)
 # support cross-origin
 CORS(app, resources=r'/*', supports_credentials=True)
@@ -89,7 +63,6 @@ def json_contents(ret):
     return response
 
 
-# 获取最近一个天象：GET https://127.0.0.1/api/v1.0/objects?new=1&token=ABCDEF0123456789
 @app.route('/api/v1.0/objects', methods=['GET'])
 def get_objects():
     req_new = request.args.get('new', u'')
@@ -98,7 +71,6 @@ def get_objects():
     if req_token != 'ABCDEF0123456789':
         return jsonify({'error': 'invalid token!! Please re-login!!'})
     else:
-        # return jsonify({'objects': map(make_public_object, get_object_db(req_new))})
         return jsonify({'objects': get_object_db(req_new)})
 
 
@@ -193,27 +165,5 @@ def delete_object(object_id):
     return jsonify({'result': True})
 
 
-def init_log():
-    logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s %(filename)s'
-                   '[line:%(lineno)d] %(levelname)s %(message)s',
-            datefmt='%a, %d %b %Y %H:%M:%S',
-            filename='api.log',
-            filemode='w')
-    console = logging.StreamHandler()
-    console.setLevel(logging.DEBUG)
-    console.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
-    console.setFormatter(formatter)
-    logging.getLogger('').addHandler(console)
-
-
 if __name__ == '__main__':
-    init_log()
     app.run(debug=True, host="0.0.0.0", port=8081)
-    # if https:
-    #app.run(debug=True, host="0.0.0.0", port=80, ssl_context=(
-    #    "server/server-cert.pem",
-    #    "server/server-key.pem")
-    #)
