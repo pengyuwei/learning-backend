@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-#-*- coding: UTF-8 -*-
-#coding=utf8
+# -*- coding: UTF-8 -*-
+# coding=utf8
 
 import logging
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-#-*- coding: UTF-8 -*-
-#coding=utf8
+# -*- coding: UTF-8 -*-
+# coding=utf8
 
 from flask import Flask, jsonify, abort, make_response, request, url_for
 from flask_cors import CORS
 import logging
-#from flask.ext.httpauth import HTTPBasicAuth
+# from flask.ext.httpauth import HTTPBasicAuth
 
 app = Flask(__name__)
 # support cross-origin
@@ -42,7 +42,10 @@ def make_public_object(object):
     new_object = {}
     for field in object:
         if field == 'id':
-            new_object['uri'] = url_for('get_object', object_id=object['id'], _external=True)
+            new_object['uri'] = url_for(
+                'get_object',
+                object_id=object['id'],
+                _external=True)
         else:
             new_object[field] = object[field]
     return new_object
@@ -58,8 +61,10 @@ def valid_token(req_token):
 def json_contents(ret):
     response = make_response(jsonify(ret))
     response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
-    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
+    response.headers[
+        'Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
+    response.headers[
+        'Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
     return response
 
 
@@ -97,21 +102,22 @@ def not_found(error):
 @app.route('/api/v1.0/get_token', methods=['POST'])
 def get_token():
     if not request.form.get('user'):
-       abort(400)
-    
+        abort(400)
+
     user = request.form.get('user')
     passwd = request.form.get('passwd')
-    
+
     if user == 'test' and passwd == 'test':
         token = 'ABCDEF0123456789'
         return json_contents({'token': token})
     else:
-        return json_contents({'error': 'Invalid user or password!! Please re-login!!'})
+        return json_contents({
+            'error': 'Invalid user or password!! Please re-login!!'})
 
 
 @app.route('/api/v1.0/login', methods=['POST'])
 def login_verify():
-    if not request.json or not 'user' in request.json:
+    if not request.json or 'user' not in request.json:
         abort(400)
     if request.json['user'] == 'test' and request.json['passwd'] == 'test':
         token = 'ABCDEF0123456789'
@@ -123,11 +129,9 @@ def login_verify():
 @app.route('/api/v1.0/objects', methods=['POST'])
 def create_object():
     global objects
-    # if not request.json or not 'title' in request.json or not 'token' in request.json:
-    #     abort(400)
     if not valid_token(request.args['token']):
         return jsonify({'error': 'invalid token!! Please re-login!!'})
-    
+
     title = request.json.get('title')
     description = request.json.get('description', "")
     newobject = {
@@ -148,10 +152,13 @@ def update_object(object_id):
         abort(400)
     if 'title' in request.json and type(request.json['title']) != unicode:
         abort(400)
-    if 'description' in request.json and type(request.json['description']) is not unicode:
+    if 'description' in request.json and type(
+            request.json['description']) is not unicode:
         abort(400)
     object[0]['title'] = request.json.get('title', object[0]['title'])
-    object[0]['description'] = request.json.get('description', object[0]['description'])
+    object[0]['description'] = request.json.get(
+        'description',
+        object[0]['description'])
     return jsonify({'object': object[0]})
 
 
