@@ -40,6 +40,50 @@ curl -H 'Content-Type: application/json' -H 'Authorization:ABCDEF0123456789' "ht
 curl -X POST -H 'Content-Type: application/json' -H 'Authorization:ABCDEF0123456789' -d '{"title":"title","description":"some text"}' 'http://127.0.0.1:8081/api/v1.0/objects'
 ```
 
+```
+客户端尝试
+OPTIONS /api/v1.0/objects HTTP/1.1
+Host: example.com:8081
+Connection: keep-alive
+Accept: */*
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: authorization,content-type
+Origin: null
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.67 Safari/537.36
+Sec-Fetch-Mode: cors
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+服务器响应
+HTTP/1.0 200 OK
+Content-Type: text/html; charset=utf-8
+Allow: POST, HEAD, OPTIONS, GET
+Access-Control-Allow-Origin: null
+Access-Control-Allow-Methods: DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT
+Vary: Origin
+Access-Control-Allow-Headers: authorization, content-type
+Access-Control-Allow-Credentials: true
+Content-Length: 0
+Server: Werkzeug/1.0.1 Python/2.7.16
+Date: Mon, 30 Nov 2020 14:07:01 GMT
+
+客户端再次请求
+POST /api/v1.0/objects HTTP/1.1
+Host: example.com:8081
+Connection: keep-alive
+Content-Length: 41
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.67 Safari/537.36
+DNT: 1
+authorization: ABCDEF0123456789
+content-type: application/json
+Accept: */*
+Origin: null
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+title=newtitle&description=newdescription
+```
+
 修改这个对象的信息（PUT）
 ```
 curl -X PUT -H 'Content-Type: application/json' -H 'Authorization:ABCDEF0123456789' -d '{"title":"newtitle","description":"newdesc"}' 'http://127.0.0.1:8081/api/v1.0/objects/1'

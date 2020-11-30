@@ -46,9 +46,11 @@ def json_contents(ret):
     response = make_response(jsonify(ret))
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] \
-        = 'OPTIONS,HEAD,GET,POST,PUT'
+        = 'OPTIONS,GET,POST'
     response.headers['Access-Control-Allow-Headers'] \
-        = 'x-requested-with,Content-Type,Authorization'
+        = 'X-Requested-With,Content-Type,Authorization,Accept'
+    response.headers['Access-Control-Max-Age'] = 5
+    
     return response
 
 
@@ -95,7 +97,6 @@ def get_objects():
 @app.route('/api/v1.0/objects', methods=['POST'])
 def create_object():
     global objects
-    print(request.headers)
     if not valid_token(request.headers['Authorization']):
         return jsonify({'error': AUTH_FAILED})
 
