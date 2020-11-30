@@ -74,4 +74,6 @@ app.run(debug=True, host="0.0.0.0", port=80, ssl_context=(
 # 参考文档
 
 - https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch#Headers
-
+- https://itbilu.com/javascript/js/VkiXuUcC.html
+- https://hyjk2000.github.io/2015/04/02/cors-for-restful-api/
+- https://www.ruanyifeng.com/blog/2016/04/cors.html

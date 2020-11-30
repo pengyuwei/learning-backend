@@ -52,6 +52,11 @@ def json_contents(ret):
     return response
 
 
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
 @app.route('/api/v1.0/get_token', methods=['POST'])
 def get_token():
     if not request.form.get('user'):
@@ -83,8 +88,26 @@ def get_objects():
     print(request.headers)
     if not valid_token(request.headers['Authorization']):
         return jsonify({'error': AUTH_FAILED})
-    else:
-        return jsonify({'objects': get_object_db(None)})
+    
+    return jsonify({'objects': get_object_db(None)})
+
+
+@app.route('/api/v1.0/objects', methods=['POST'])
+def create_object():
+    global objects
+    print(request.headers)
+    if not valid_token(request.headers['Authorization']):
+        return jsonify({'error': AUTH_FAILED})
+
+    title = request.json.get('title')
+    description = request.json.get('description', "")
+    newobject = {
+        'id': objects[-1]['id'] + 1,
+        'title': title,
+        'description': description,
+    }
+    objects.append(newobject)
+    return jsonify({'object': newobject}), 200
 
 
 @app.route('/api/v1.0/objects/<int:object_id>', methods=['GET'])
@@ -99,28 +122,6 @@ def get_object(object_id):
     if len(object) == 0:
         abort(404)
     return jsonify({'object': object[0]})
-
-
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
-
-@app.route('/api/v1.0/objects', methods=['POST'])
-def create_object():
-    global objects
-    if not valid_token(request.headers['Authorization']):
-        return jsonify({'error': AUTH_FAILED})
-
-    title = request.json.get('title')
-    description = request.json.get('description', "")
-    newobject = {
-        'id': objects[-1]['id'] + 1,
-        'title': title,
-        'description': description,
-    }
-    objects.append(newobject)
-    return jsonify({'object': newobject}), 200
 
 
 @app.route('/api/v1.0/objects/<int:object_id>', methods=['PUT'])
