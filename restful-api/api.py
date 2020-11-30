@@ -25,6 +25,7 @@ objects = [
 ]
 
 token = ''
+AUTH_FAILED = 'Invalid token, Please relogin.'
 
 
 # 从数据库查询对象信息
@@ -34,25 +35,8 @@ def get_object_db(req_new):
     return ret
 
 
-def get_new_object():
-    return {}
-
-
-def make_public_object(object):
-    new_object = {}
-    for field in object:
-        if field == 'id':
-            new_object['uri'] = url_for(
-                'get_object',
-                object_id=object['id'],
-                _external=True)
-        else:
-            new_object[field] = object[field]
-    return new_object
-
-
-def valid_token(req_token):
-    if req_token == 'ABCDEF0123456789':
+def valid_token(token):
+    if token == 'ABCDEF0123456789':
         return True
     else:
         return False
@@ -61,42 +45,11 @@ def valid_token(req_token):
 def json_contents(ret):
     response = make_response(jsonify(ret))
     response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers[
-        'Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
-    response.headers[
-        'Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
+    response.headers['Access-Control-Allow-Methods'] \
+        = 'OPTIONS,HEAD,GET,POST,PUT'
+    response.headers['Access-Control-Allow-Headers'] \
+        = 'x-requested-with,Content-Type,Authorization'
     return response
-
-
-@app.route('/api/v1.0/objects', methods=['GET'])
-def get_objects():
-    req_new = request.args.get('new', u'')
-    logging.info("req_new=" + req_new)
-    req_token = request.args.get('token', u'')
-    if req_token != 'ABCDEF0123456789':
-        return jsonify({'error': 'invalid token!! Please re-login!!'})
-    else:
-        return jsonify({'objects': get_object_db(req_new)})
-
-
-@app.route('/api/v1.0/objects/<int:object_id>', methods=['GET'])
-def get_object(object_id):
-    req_token = request.args.get('token', u'')
-    if valid_token(req_token):
-        if object_id == '0':
-            ret = get_new_object()
-            return jsonify({'object': ret})
-        object = filter(lambda t: t['id'] == object_id, get_object_db(None))
-        if len(object) == 0:
-            abort(404)
-        return jsonify({'object': object[0]})
-    else:
-        return jsonify({'error': 'invalid token!! Please re-login!!'})
-
-
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 @app.route('/api/v1.0/get_token', methods=['POST'])
@@ -111,8 +64,7 @@ def get_token():
         token = 'ABCDEF0123456789'
         return json_contents({'token': token})
     else:
-        return json_contents({
-            'error': 'Invalid user or password!! Please re-login!!'})
+        return json_contents({'error': AUTH_FAILED})
 
 
 @app.route('/api/v1.0/login', methods=['POST'])
@@ -126,11 +78,39 @@ def login_verify():
         return None
 
 
+@app.route('/api/v1.0/objects', methods=['GET'])
+def get_objects():
+    print(request.headers)
+    if not valid_token(request.headers['Authorization']):
+        return jsonify({'error': AUTH_FAILED})
+    else:
+        return jsonify({'objects': get_object_db(None)})
+
+
+@app.route('/api/v1.0/objects/<int:object_id>', methods=['GET'])
+def get_object(object_id):
+    if not valid_token(request.headers['Authorization']):
+        return jsonify({'error': AUTH_FAILED})
+
+    if object_id == '0':
+        ret = {}
+        return jsonify({'object': ret})
+    object = filter(lambda t: t['id'] == object_id, get_object_db(None))
+    if len(object) == 0:
+        abort(404)
+    return jsonify({'object': object[0]})
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
 @app.route('/api/v1.0/objects', methods=['POST'])
 def create_object():
     global objects
-    if not valid_token(request.args['token']):
-        return jsonify({'error': 'invalid token!! Please re-login!!'})
+    if not valid_token(request.headers['Authorization']):
+        return jsonify({'error': AUTH_FAILED})
 
     title = request.json.get('title')
     description = request.json.get('description', "")
@@ -140,11 +120,14 @@ def create_object():
         'description': description,
     }
     objects.append(newobject)
-    return jsonify({'object': newobject}), 201
+    return jsonify({'object': newobject}), 200
 
 
 @app.route('/api/v1.0/objects/<int:object_id>', methods=['PUT'])
 def update_object(object_id):
+    if not valid_token(request.headers['Authorization']):
+        return jsonify({'error': AUTH_FAILED})
+
     object = filter(lambda t: t['id'] == object_id, objects)
     if len(object) == 0:
         abort(404)
@@ -165,6 +148,9 @@ def update_object(object_id):
 @app.route('/api/v1.0/objects/<int:object_id>', methods=['DELETE'])
 def delete_object(object_id):
     global objects
+    if not valid_token(request.headers['Authorization']):
+        return jsonify({'error': AUTH_FAILED})
+
     object = filter(lambda t: t['id'] == object_id, objects)
     if len(object) == 0:
         abort(404)
