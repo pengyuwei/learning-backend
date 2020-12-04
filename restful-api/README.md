@@ -115,9 +115,64 @@ app.run(debug=True, host="0.0.0.0", port=80, ssl_context=(
 )
 ```
 
+
+## 概念
+
+CORS：Cross-origin resource sharing，跨域资源共享，一个W3C标准
+
+1. 简单请求
+- HEAD、GET、POST
+- 头只包含Accept等
+- Content-Type只限于application/x-www-form-urlencoded、multipart/- form-data、text/plain。
+
+2. 非简单请求
+- Restful API使用非简单请求
+- Content-Type为application/json
+- 支持PUT和DELETE方法。
+- 额外的OPTIONS预检流程
+
+典型的预检请求：
+Access-Control-Request-Method为必须
+```
+OPTIONS /cors HTTP/1.1
+Origin: http://api.bob.com
+Access-Control-Request-Method: PUT
+Access-Control-Request-Headers: X-Custom-Header
+Host: api.alice.com
+Accept-Language: en-US
+Connection: keep-alive
+User-Agent: Mozilla/5.0...
+```
+典型的回复：
+```
+HTTP/1.1 200 OK
+Date: Mon, 01 Dec 2008 01:15:39 GMT
+Server: Apache/2.0.61 (Unix)
+Access-Control-Allow-Origin: http://api.bob.com
+Access-Control-Allow-Methods: GET, POST, PUT
+Access-Control-Allow-Headers: X-Custom-Header
+Content-Type: text/html; charset=utf-8
+Content-Encoding: gzip
+Content-Length: 0
+Keep-Alive: timeout=2, max=100
+Connection: Keep-Alive
+Content-Type: text/plain
+```
+Access-Control-Allow-Origin为关键，可以为*号
+
+方法对应关系
+1. GET（SELECT）：从服务器取出资源（一项或多项）。
+1. POST（CREATE）：在服务器新建一个资源。
+1. PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）。
+1. PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）。
+1. DELETE（DELETE）：从服务器删除资源。
+
 # 参考文档
 
 - https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch#Headers
 - https://itbilu.com/javascript/js/VkiXuUcC.html
 - https://hyjk2000.github.io/2015/04/02/cors-for-restful-api/
 - https://www.ruanyifeng.com/blog/2016/04/cors.html
+- https://wizardforcel.gitbooks.io/flask-extension-docs/content/flask-restful-2.html
+- https://github.com/miguelgrinberg/REST-auth
+- https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
