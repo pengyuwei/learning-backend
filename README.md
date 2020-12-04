@@ -16,3 +16,4 @@ Python学习笔记
 - [pep8](https://www.python.org/dev/peps/pep-0008/)
 - https://docs.python.org/2/library/json.html
 - https://docs.python.org/zh-cn/3/library/getopt.html
+- 《Dive Into Python》
