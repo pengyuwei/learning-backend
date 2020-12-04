@@ -50,7 +50,7 @@ def json_contents(ret):
     response.headers['Access-Control-Allow-Headers'] \
         = 'X-Requested-With,Content-Type,Authorization,Accept'
     response.headers['Access-Control-Max-Age'] = 5
-    
+
     return response
 
 
@@ -90,7 +90,7 @@ def get_objects():
     print(request.headers)
     if not valid_token(request.headers['Authorization']):
         return jsonify({'error': AUTH_FAILED})
-    
+
     return jsonify({'objects': get_object_db(None)})
 
 
