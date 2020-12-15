@@ -100,9 +100,11 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Authorization:ABCDEF01234
 - URL参数请求：通过flask.request.args获取；
 - FORM表单请求：通过flask.request.form获取；
 - Header头：通过flask.request.headers获取；
+- json数据：通过flask.request.json获取；
 
 请求规范：
-- 参数均为application/json
+- 认证信息，如Token，放在Header中
+- Content-Type统一设为application/json
 
 服务响应规范：
 - 服务器回应的 HTTP 头的Content-Type属性统一设为application/json

@@ -29,6 +29,8 @@ class ToyDB:
     def run_sql(self, sql):
         self.cur.execute(sql)
         self.conn.commit()
+        print(self.conn.insert_id())
+        print(self.cur.lastrowid)
 
     def select_sql(self, sql):
         aa = self.cur.execute(sql)
@@ -55,6 +57,10 @@ def test_mysql_db():
                         "name": itor[1],
                         "age": itor[2]})
     print ret
+
+    sql = 'insert into test.test_tables(name,age) values('1','2');'
+    db.run_sql(sql)
+
     db.close()
 
 
