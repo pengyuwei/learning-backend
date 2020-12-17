@@ -108,6 +108,7 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Authorization:ABCDEF01234
 
 服务响应规范：
 - 服务器回应的 HTTP 头的Content-Type属性统一设为application/json
+- 使用HTTP状态吗返回错误状态，而不是不管对错都200
 
 如果使用https，这样启动服务：
 ```
@@ -175,6 +176,7 @@ Access-Control-Allow-Origin为关键，可以为*号
 - https://itbilu.com/javascript/js/VkiXuUcC.html
 - https://hyjk2000.github.io/2015/04/02/cors-for-restful-api/
 - https://www.ruanyifeng.com/blog/2016/04/cors.html
+- https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api
 - https://wizardforcel.gitbooks.io/flask-extension-docs/content/flask-restful-2.html
 - https://github.com/miguelgrinberg/REST-auth
 - https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html

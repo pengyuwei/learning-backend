@@ -15,10 +15,12 @@ def test_redis():
     print(type(r.get('name')))
 
     # Overdue key
-    r.set('overdue-key', 'timeout=3s', ex=3)
-    print(r.get('overdue-key'))
+    key = 'overdue-key'
+    r.set(key, 'value = timeout 3s', ex=3)
+    print(r.get(key))
+    r.expire(key, 2)
     time.sleep(5)
-    print(r.get('overdue-key'))
+    print(r.get(key))
 
 
 if __name__ == '__main__':
