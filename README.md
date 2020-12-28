@@ -10,6 +10,7 @@ Python学习笔记
 - [redis](redis)：访问redis
 - [mongodb](mongodb)：使用pymongo访问mongodb
 - [restful-api](restful-api)：使用Flask构建Restful API
+- [weibo](weibo): 调用新浪微博API
 
 # 参考资料
 

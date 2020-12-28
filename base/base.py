@@ -60,21 +60,23 @@ def test_dict():
 def log(func):
     def wrapper(*args, **kw):
         print('------ %s() -------' % func.__name__)
-        return func(*args, **kw)
+        return func(True, *args, **kw)
     return wrapper
 
 
 @log
-def test_decorator():
+def test_decorator(check, para):
     from datetime import datetime as DT
     print(DT.now())
+    assert(check == True)
+    assert(para == 1)
 
 
 def main():
     test_language_base()
     test_dict()
     test_staticmethod()
-    test_decorator()
+    test_decorator(1)
 
 
 if __name__ == '__main__':
