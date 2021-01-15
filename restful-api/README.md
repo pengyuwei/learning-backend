@@ -14,6 +14,7 @@ pip install flask
 pip install flask-cors
 pip install pyOpenSSL
 pip install Flask-SSLify
+pip install gevent
 ```
 
 启动服务
