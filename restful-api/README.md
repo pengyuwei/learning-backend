@@ -1,5 +1,9 @@
 # Restful-API
 
+Python Restful-API框架
+- Flask（本例使用）
+- Django REST Framework (DRF)
+
 ## 开发环境
 
 ```
@@ -110,12 +114,24 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Authorization:ABCDEF01234
 - 服务器回应的 HTTP 头的Content-Type属性统一设为application/json
 - 使用HTTP状态吗返回错误状态，而不是不管对错都200
 
-如果使用https，这样启动服务：
+http开发模式启动服务：
+```
+app.run(debug=True, host="0.0.0.0", port=80)
+```
+
+https开发模式启动服务：
 ```
 app.run(debug=True, host="0.0.0.0", port=80, ssl_context=(
     "server/server-cert.pem",
-    "server/server-key.pem")
+    "server/server-key.key")
 )
+```
+
+https生产环境启动：
+```
+server = pywsgi.WSGIServer(('0.0.0.0', 80), app, keyfile="server/server-cert.pem", 
+    certfile="server/server-key.key")
+server.serve_forever()
 ```
 
 
