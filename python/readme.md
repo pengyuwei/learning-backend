@@ -18,3 +18,4 @@ Python学习笔记
 - https://docs.python.org/2/library/json.html
 - https://docs.python.org/zh-cn/3/library/getopt.html
 - [《Dive Into Python》](https://book.douban.com/subject/1440658/)
+- [3Blue1Brown](https://www.3blue1brown.com/) [Youtube频道](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw)

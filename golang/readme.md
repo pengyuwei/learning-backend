@@ -47,3 +47,6 @@ Mongo
 Moudle && pkg
 - [Go模块代理速度实测](https://studygolang.com/topics/9994)
 - [Go手动安装pkg包](https://blog.csdn.net/u012393450/article/details/82665588)
+
+GUI
+- https://github.com/fyne-io/fyne
