@@ -12,6 +12,14 @@ Python学习笔记
 - [restful-api](restful-api)：使用Flask构建Restful API
 - [weibo](weibo): 调用新浪微博API
 
+# 基础环境
+
+macOS
+```
+brew install pycodestyle
+alias pep8='_pycodestyle(){ /Users/pyw/Library/Python/2.7/bin/pycodestyle $1;}; _pycodestyle'
+```
+
 # 参考资料
 
 - [pep8](https://www.python.org/dev/peps/pep-0008/)
