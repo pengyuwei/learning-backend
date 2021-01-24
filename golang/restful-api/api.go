@@ -6,7 +6,7 @@ import (
   "encoding/json"
   "net/http"
   // "strconv"
-
+  // golang+mux的性能大约比Python+Flask快20-30%
   "github.com/gorilla/mux"
 )
 

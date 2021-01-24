@@ -50,3 +50,6 @@ Moudle && pkg
 
 GUI
 - https://github.com/fyne-io/fyne
+
+API
+- https://dev.to/innovationincu/rest-api-performance-comparison-python-vs-golang-3h81
