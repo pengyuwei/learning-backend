@@ -16,6 +16,10 @@ class CDemo():
     def func2(self):
         print('val=%d' % self.val)
 
+    @mysql_conn
+    def func3(self, conn):
+        assert(conn == 'mysql')
+
 
 def test_staticmethod():
     CDemo.func()
@@ -56,27 +60,13 @@ def test_dict():
         print(i, item)
     print('-' * 40)
 
-
-def log(func):
-    def wrapper(*args, **kw):
-        print('------ %s() -------' % func.__name__)
-        return func(True, *args, **kw)
-    return wrapper
-
-
-@log
-def test_decorator(check, para):
-    from datetime import datetime as DT
-    print(DT.now())
-    assert(check == True)
-    assert(para == 1)
-
-
 def main():
     test_language_base()
     test_dict()
     test_staticmethod()
-    test_decorator(1)
+
+    demo = CDemo()
+    demo.func3()
 
 
 if __name__ == '__main__':

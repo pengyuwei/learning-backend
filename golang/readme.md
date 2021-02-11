@@ -52,4 +52,6 @@ GUI
 - https://github.com/fyne-io/fyne
 
 API
+- [REST-API with Golang and Mux](https://medium.com/@hugo.bjarred/rest-api-with-golang-and-mux-e934f581b8b5)
+- [理解OAuth 2.0](https://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
 - https://dev.to/innovationincu/rest-api-performance-comparison-python-vs-golang-3h81
