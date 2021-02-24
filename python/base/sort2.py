@@ -98,25 +98,25 @@ naive2 1000 times spend 259805 us
     b = sorted(random.sample(range(10000), 1000))
   
     begin = nowus()
-    for i in range(1, 1000):
+    for i in range(0, 1000):
         sort(a, b)
     end = nowus()
     print '  sort 1000 times spend', end - begin, 'us'
 
     begin = nowus()
-    for i in range(1, 1000):
+    for i in range(0, 1000):
         merge(a, b)
     end = nowus()
     print ' merge 1000 times spend', end - begin, 'us'
 
     begin = nowus()
-    for i in range(1, 1000):
+    for i in range(0, 1000):
         naive2(a, b)
     end = nowus()
     print 'naive2 1000 times spend', end - begin, 'us'
 
     begin = nowus()
-    for i in range(1, 1000):
+    for i in range(0, 1000):
         join_sort(a, b)
     end = nowus()
     print '  join 1000 times spend', end - begin, 'us'
