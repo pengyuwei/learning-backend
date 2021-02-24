@@ -1,11 +1,15 @@
-#!/usr/bin/env python
+#!/nsr/bin/env python
 # -*- coding: UTF-8 -*-
 # coding=utf8
 
+# sudo apt install python3.7
+# python3.7 -m pip install numpy
+# python3.7 -m pip install sortednp
 import random
 import time
 import datetime
-
+import numpy as np
+import sortednp  # Merge and intersect sorted numpy arrays.
 
 # by zzj 2021-2-24
 def naive2(a, b):
@@ -55,15 +59,15 @@ def join(a, b):
     it_b = iter(b)
     a = b = None
     try:
-        a = it_a.next()
-        b = it_b.next()
+        a = next(it_a)
+        b = next(it_b)
         while True:
             if a <= b:
                 yield a; a = None
-                a = it_a.next()
+                a = next(it_a)
             else:
                 yield b; y = None
-                b = it_b.next()
+                b = next(it_b)
     except StopIteration:
         if a or b: yield a or b
         for a in it_a: yield a
@@ -81,45 +85,62 @@ def sort(a, b):
     return sorted(a + b)
 
 
-def nowus():
-    t = time.time()
-    return int(round(t * 1000000))
+# by Whistler 2021-2-24
+def merge_numpy(a, b):
+    c = sortednp.merge(a, b)
+    return c
+  
+
+def nowns():
+    return time.time_ns()
+    # t = time.time.time_ns()
+    # return int(round(t * 1000000))
 
 
 def main():
     """
- numpy 1000 times spend 13148 us
-  sort 1000 times spend 50459 us
- merge 1000 times spend 213063 us
-naive2 1000 times spend 259805 us
-  join 1000 times spend 355014 us
+c_merge 1000 times spend 5086015 ns
+  numpy 1000 times spend 13364420 ns
+   sort 1000 times spend 30804664 ns
+  merge 1000 times spend 281948268 ns
+ naive2 1000 times spend 276838519 ns
+   join 1000 times spend 243146704 ns
     """
     a = sorted(random.sample(range(10000), 1000))
     b = sorted(random.sample(range(10000), 1000))
   
-    begin = nowus()
+    npa = np.array(a)
+    npb = np.array(b)
+    begin = nowns()
+    for i in range(0, 1000):
+        merge_numpy(npa, npb)
+    end = nowns()
+    print('  numpy 1000 times spend', end - begin, 'ns')
+
+    begin = nowns()
     for i in range(0, 1000):
         sort(a, b)
-    end = nowus()
-    print '  sort 1000 times spend', end - begin, 'us'
+    end = nowns()
+    print('   sort 1000 times spend', end - begin, 'ns')
 
-    begin = nowus()
+    begin = nowns()
     for i in range(0, 1000):
         merge(a, b)
-    end = nowus()
-    print ' merge 1000 times spend', end - begin, 'us'
+    end = nowns()
+    print('  merge 1000 times spend', end - begin, 'ns')
 
-    begin = nowus()
+    begin = nowns()
     for i in range(0, 1000):
         naive2(a, b)
-    end = nowus()
-    print 'naive2 1000 times spend', end - begin, 'us'
+    end = nowns()
+    print(' naive2 1000 times spend', end - begin, 'ns')
 
-    begin = nowus()
+    begin = nowns()
     for i in range(0, 1000):
         join_sort(a, b)
-    end = nowus()
-    print '  join 1000 times spend', end - begin, 'us'
+    end = nowns()
+    print('   join 1000 times spend', end - begin, 'ns')
+
 
 if __name__ == '__main__':
     main()
