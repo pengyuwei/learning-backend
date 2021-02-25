@@ -1,6 +1,7 @@
 # my temp file
 temp.json
 .vscode
+target
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
