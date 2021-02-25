@@ -8,6 +8,8 @@
   - [mongodb](mongodb)：使用pymongo访问mongodb
   - [restful-api](restful-api)：使用Flask构建Restful API
   - [weibo](weibo): 调用新浪微博API
+- [rust](rust)
+  - [base](hello/src/main.rs)
 - [go](golang/)
   - [语言基础](golang/base)
   - [MySQL](golang/db/mysql.go)

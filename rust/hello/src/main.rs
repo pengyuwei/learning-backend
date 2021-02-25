@@ -82,7 +82,7 @@ fn test_mem() {
     // x1 use-able
     assert!(x == 1);
 
-    let s5 = &s4; /// 引用不会获得所有权，因此不能修改变量的值，只能租借一份引用给别人
+    let s5 = &s4; // 引用不会获得所有权，因此不能修改变量的值，只能租借一份引用给别人
     println!("s4={}, s5={}", s4, s5);
     let len = _test_mem_helper3(&s5);
     assert!(len == 5);
