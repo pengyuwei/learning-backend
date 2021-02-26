@@ -1,3 +1,6 @@
+mod slice;
+mod rsstruct;
+
 fn add(a: i32, b: i32) -> i32 {
     return a + b;
 }
@@ -187,4 +190,8 @@ fn main() {
     test_loop();
 
     test_mem();
+
+    slice::slice1();
+
+    rsstruct::test_struct();
 }
