@@ -2,6 +2,7 @@ package main
 import "fmt"
 import "reflect"
 import "strconv"
+
 //import "unsafe"
 
 
@@ -11,7 +12,7 @@ func scope() {
     fmt.Println("-----------scope begin----------------------")
     fmt.Println(global) // 1
     {
-         global := 2
+        global := 2
         fmt.Println(global) // 2
     }
     fmt.Println(global) // 1
@@ -45,10 +46,10 @@ func pointer() {
     fmt.Println("&sp=", &sp)
 }
 
+// 返回多个结果
 func swap(x, y string) (string, string) {
    return y, x
 }
-
 
 func swap2(x *int, y *int) {
    var temp int
@@ -150,6 +151,17 @@ func main() {
         fmt.Println(i)
         i = i + 1
     }
+    switch i {
+    case 2:
+        fmt.Println("i==2")
+    default:
+        fmt.Println("i!=2")
+    }
+
+    numbers := []int{1,2,3}
+    for ii, n := range numbers {
+        fmt.Println("range loop:", ii, n)
+    }
     
     fmt.Println(test("test"))
 
@@ -159,6 +171,7 @@ func main() {
     typeof()
     convert()
     scope()
+    
 }
 
 

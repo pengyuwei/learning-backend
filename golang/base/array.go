@@ -7,7 +7,8 @@ func array()  {
     var games [3]string
     games[0] = "pal"
     games[1] = "tank"
-    games[2] = "quake"  
+    games[2] = "quake"
+    fmt.Println(games) // [pal tank quake]
 }
 
 func main() {
