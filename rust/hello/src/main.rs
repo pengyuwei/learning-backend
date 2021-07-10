@@ -1,5 +1,6 @@
 mod slice;
 mod rsstruct;
+mod swap;
 
 fn add(a: i32, b: i32) -> i32 {
     return a + b;
@@ -194,4 +195,7 @@ fn main() {
     slice::slice1();
 
     rsstruct::test_struct();
+
+    swap::swap1(1, 2);
+    swap::swap2(1, 2);
 }

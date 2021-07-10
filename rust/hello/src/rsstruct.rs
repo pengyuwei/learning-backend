@@ -17,15 +17,15 @@ impl User {
 
 pub fn test_struct() {
     let name = String::from("Tom");
-    let Tom = User {
+    let tom = User {
         name,
         password: String::from("123456"),
         age: 42
     };
 
-    let Jerry = User {
+    let jerry = User {
         password: String::from("654321"),
-        ..Tom
+        ..tom
     }; // Tom moved
 
     struct Color(u8, u8, u8);
@@ -35,7 +35,7 @@ pub fn test_struct() {
     println!("black = ({}, {}, {})", black.0, black.1, black.2);
     println!("origin = ({}, {})", origin.0, origin.1);
 
-    println!("Jerry is {:?}", Jerry); // because of #[derive(Debug)]
-    println!("Jerry.token is {:?}", Jerry.token());
+    println!("Jerry is {:?}", jerry); // because of #[derive(Debug)]
+    println!("Jerry.token is {:?}", jerry.token());
     println!("Jerry.token is {:?}", User::create());
 }

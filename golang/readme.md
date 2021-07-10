@@ -7,6 +7,8 @@
 export GO111MODULE=on
 export GOPROXY=https://goproxy.io
 go mod init learning-go
+go get -u golang.org/x/lint
+go get golang.org/x/tools/cmd/godoc
 go get github.com/jinzhu/gorm
 go get github.com/go-sql-driver/mysql
 go get github.com/gorilla/mux
@@ -18,13 +20,20 @@ go get github.com/mongodb/mongo-go-driver
 go run xxxx.go
 ```
 
+- gofmt：代码标准化工具
+- golint：代码标准化检查工具
+- godoc：代码文档生成工具
+
 # 参考文档
 
 语言基础
-- 《Go语言入门经典》
+- https://github.com/shapeshed/golang-book-examples
 - https://www.runoob.com/go/go-tutorial.html
 - http://c.biancheng.net/view/61.html
 - https://www.runoob.com/go/go-structures.html
+
+在线运行环境
+- https://play.golang.org/
 
 MySQL
 - https://gorm.io/zh_CN/docs/index.html
