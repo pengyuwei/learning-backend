@@ -9,7 +9,7 @@ import (
 	"github.com/sevlyar/go-daemon"
 )
 
-// CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o daemon daemon.go
+// CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o daemon.out daemon.go
 // To terminate the daemon use:
 //  kill `cat sample.pid`
 func main() {
