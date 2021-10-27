@@ -10,6 +10,7 @@
   - [weibo](weibo): 调用新浪微博API
 - [rust](rust)
   - [base](rust/hello/src/main.rs)
+  - [教程](https://kaisery.github.io/trpl-zh-cn/)
 - [go](golang/)
   - [语言基础](golang/base)
   - [MySQL](golang/db/mysql.go)

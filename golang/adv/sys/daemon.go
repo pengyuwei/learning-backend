@@ -9,10 +9,7 @@ import (
 	"github.com/sevlyar/go-daemon"
 )
 
-// CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o daemon.out daemon.go
-// To terminate the daemon use:
-//  kill `cat sample.pid`
-func main() {
+func runDaemon() (bool) {
 	cntxt := &daemon.Context{
 		PidFileName: "sample.pid",
 		PidFilePerm: 0644,
@@ -28,12 +25,23 @@ func main() {
 		log.Fatal("Unable to run: ", err)
 	}
 	if d != nil {
-		return
+		return false
 	}
 	defer cntxt.Release()
 
 	log.Print("- - - - - - - - - - - - - - -")
 	log.Print("daemon started")
+	return true
+}
+
+// daemon.go
+// To terminate the daemon use:
+// kill `cat sample.pid`
+func main() {
+	ret := runDaemon()
+	if (!ret) {
+		return
+	}
 
 	serveHTTP()
 }

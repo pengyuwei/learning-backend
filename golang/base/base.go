@@ -1,7 +1,10 @@
 package main
-import "fmt"
-import "reflect"
-import "strconv"
+
+import (
+	"fmt"
+	"reflect"
+	"strconv"
+)
 
 //import "unsafe"
 
@@ -85,6 +88,13 @@ func tryvar()  {
     fmt.Printf("%v\n", e)
 
     const c string = "Im const var"
+    var multistring string = `
+    line 1
+    line 2
+    `
+    multistring = `SELECT * FROM ` + "`key`"
+    fmt.Println(&multistring)
+
     newvar := 11 // 等效于 var newvar = 11    
     fmt.Println(&newvar)
     
