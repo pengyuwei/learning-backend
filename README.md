@@ -12,7 +12,7 @@
   - [base](rust/hello/src/main.rs)
   - [教程](https://kaisery.github.io/trpl-zh-cn/)
 - [go](golang/)
-  - [语言基础](golang/base)
+  - [语言基础](golang/base)：[二维数组排序方法1](base/sort1.go) [二维数组排序方法2](base/sort2.go)
   - [MySQL](golang/db/mysql.go)
   - [restful-api](golang/restful-api)：使用mux构建Restful API
 - [java](java)
