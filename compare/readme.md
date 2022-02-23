@@ -42,5 +42,6 @@ wget https://golang.org/dl/go1.17.3.linux-amd64.tar.gz
 tar zxvf go1.17.3.linux-amd64.tar.gz
 sudo mv go /usr/local/
 sudo ln -s /usr/local/go/bin/go /usr/local/bin/go
+sudo apt install cargo
 
 ```

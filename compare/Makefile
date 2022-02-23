@@ -5,8 +5,8 @@ all : default
 
 default:
 	mkdir -p bin
-	gcc -Os -o bin/c hello.c
-	g++ -Os -o bin/cpp hello.cpp
+	gcc -O2 -o bin/c hello.c
+	g++ -O2 -o bin/cpp hello.cpp
 	cargo build --release
 	cp -f target/release/rust bin/rust
 	nim c -d:release -o:bin/nim -r hello.nim
