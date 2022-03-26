@@ -61,7 +61,7 @@ func swap2(x *int, y *int) {
    *y = temp
 }
 
-func tryvar()  {
+func tryVar()  {
     fmt.Println("-----------tryvar begin------------")
     var a, b int = 1, 2
     var s string = "str"
@@ -123,9 +123,13 @@ func convert()  {
     var s string = strconv.FormatBool(true)
     fmt.Println("-----------convert begin-----------")
     fmt.Println(reflect.TypeOf(s), s)
+    var i = 1
+    fmt.Println(float64(i))
+    var f = 3.14
+    fmt.Println(int(f)) // 3
 }
 
-func constvar() {
+func constVar() {
     fmt.Println("-----------constvar begin-----------")
     const defc = "abc"
     const (
@@ -174,10 +178,10 @@ func main() {
     }
     
     fmt.Println(test("test"))
-
-    constvar()
+    
+    constVar()
     pointer()
-    tryvar()
+    tryVar()
     typeof()
     convert()
     scope()

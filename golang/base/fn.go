@@ -1,5 +1,18 @@
 package main
+
 import "fmt"
+
+// 一般情况，第二个返回参数用于返回错误信息
+// 返回多个值，需要标明返回值类型
+func RetMultiVals() (int, string)  {
+    return 1, "string"
+}
+
+func callPublicFunc() {
+    // 对于不打算使用的变量，可以使用下划线(空白标识符)代替，就不会引发编译错误了.
+    a, _ := RetMultiVals()
+    fmt.Println("callPublicFunc", a)
+}
 
 // 无限参数的函数
 func sum(args...int) int {
@@ -29,11 +42,6 @@ func fnWithDefer() {
     fmt.Println("fnWithDefer1") // first output
 }
 
-// 返回多个值，需要标明返回值类型
-func RetMultiVals() (int, string)  {
-    return 1, "string"
-}
-
 func main() {
     var ret int
 
@@ -58,4 +66,6 @@ func main() {
 
     ret1, ret2 := RetMultiVals()
     fmt.Println(ret1, ret2)
+
+    callPublicFunc()
 }

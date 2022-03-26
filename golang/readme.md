@@ -14,11 +14,17 @@ go get github.com/go-sql-driver/mysql
 go get github.com/gorilla/mux
 go get github.com/mongodb/mongo-go-driver
 ```
+常用命令
 
-运行
 ```
-go run xxxx.go
+# 运行
+go run sample.go
+# 格式化代码
+go fmt sample.go
+# 编译
+go build sample.go
 ```
+
 
 - gofmt：代码标准化工具
 - golint：代码标准化检查工具
