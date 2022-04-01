@@ -2,11 +2,11 @@
 package main
 
 import (
-	"fmt"
-	"time"
+    "fmt"
+    "time"
 )
 
-func slowFunc(c (chan string)) {
+func slowFunc(c chan string) {
     time.Sleep(time.Second * 2)
     fmt.Println("sleep finished.")
     c <- "slowFunc finished"
@@ -15,19 +15,20 @@ func slowFunc(c (chan string)) {
 func useOneMsg() {
     c := make(chan string)
     go slowFunc(c)
-    
-    /* 
-    这里需要等待slowFunc执行完毕，可以这样：
-    time.Sleep(time.Second * 2)
-    但Go的标准玩法是用通道：make(chan type)
-    发送消息：chan <- value
-    接收消息：var := <- chan
+
+    /*
+       这里需要等待slowFunc执行完毕，可以这样：
+       time.Sleep(time.Second * 2)
+       但Go的标准玩法是用通道：make(chan type)
+       发送消息(阻塞)：chan <- value
+       接收消息(阻塞)：var := <- chan
     */
     msg := <-c // 收到消息前阻塞
     fmt.Println(msg)
 }
 
 func receiveBuff(c chan string) {
+    // 从带缓冲的channel中读数据
     for msg := range c {
         fmt.Println(msg)
     }
@@ -37,37 +38,38 @@ func useBuff() {
     messages := make(chan string, 2)
     messages <- "hello"
     messages <- "world"
-    close(messages) //关闭通道，禁止再发送。但缓冲的消息会被保留供读取。
+    // 应该在生产者的地方关闭channel，如果在消费者的地方关闭，容易引起panic
+    close(messages) // 关闭通道，禁止再发送。但缓冲的消息会被保留供读取
     fmt.Println("pushed two messages onto channel with no receivers")
     time.Sleep(time.Second * 1)
     receiveBuff(messages)
 }
 
 func pinger(c chan string) {
-	t := time.NewTicker(1 * time.Second)
-	for {
-		c <- "ping"
-		<-t.C // delay
-	}
+    t := time.NewTicker(1 * time.Second)
+    for {
+        c <- "ping"
+        <-t.C // delay
+    }
 }
 
 func flowControl() {
     messages := make(chan string)
-	go pinger(messages)
-	msg := <-messages
-	fmt.Println(msg)
+    go pinger(messages)
+    msg := <-messages
+    fmt.Println(msg)
 }
 
 func flowControl2() {
     messages := make(chan string)
-	go pinger(messages)
-	for i:=0;i<5;i++ {
-		msg := <-messages
-		fmt.Println(msg)
-	}
+    go pinger(messages)
+    for i := 0; i < 5; i++ {
+        msg := <-messages
+        fmt.Println(msg)
+    }
 }
 
-func channelReader(messages <- chan string) {
+func channelReader(messages <-chan string) {
     msg := messages
     fmt.Println(msg)
 }
@@ -77,7 +79,7 @@ func channelWriter(chn chan<- string) {
 }
 
 func channelReaderAndWriter(messages chan string) {
-    msg := <- messages
+    msg := <-messages
     fmt.Println(msg)
     messages <- "Hello"
 }
