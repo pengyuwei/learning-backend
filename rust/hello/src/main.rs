@@ -1,6 +1,8 @@
 mod slice;
 mod rsstruct;
 mod swap;
+mod num;
+mod compound;
 
 fn add(a: i32, b: i32) -> i32 {
     return a + b;
@@ -122,26 +124,6 @@ fn main() {
     s = "AAA";
     assert!(s == "AAA");
 
-    /*
-    位长度	有符号	无符号
-    8-bit	i8	u8
-    16-bit	i16	u16
-    32-bit	i32	u32
-    64-bit	i64	u64
-    128-bit	i128	u128
-    arch	isize	usize
-
-    进制	例
-    十进制	98_222
-    十六进制	0xff
-    八进制	0o77
-    二进制	0b1111_0000
-    字节(只能表示 u8 型)	b'A'
-    */
-
-    let _f1 = 2.0; // f64
-    let _f2: f32 = 3.0; // f32
-
     let _sum = 5 + 10; // 加
     let _difference = 95.5 - 4.3; // 减
     let _product = 4 * 30; // 乘
@@ -198,4 +180,8 @@ fn main() {
 
     swap::swap1(1, 2);
     swap::swap2(1, 2);
+
+    num::test_num();
+    compound::test_tuple();
+    compound::test_array();
 }

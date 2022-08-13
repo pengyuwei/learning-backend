@@ -23,6 +23,17 @@ brew install pycodestyle
 alias pep8='_pycodestyle(){ /Users/pyw/Library/Python/2.7/bin/pycodestyle $1;}; _pycodestyle'
 ```
 
+# 常用
+
+```
+__bases__：以元组返回一个类所直接继承的类。
+__mor__：  以元组返回继承关系链。
+__class__：返回对象所属的类。
+__globals__：以字典返回函数所在模块命名空间中的所有变量。
+__subclasses__()：以列表的返回类的子类。
+__builtins__：内建函数
+```
+
 # 参考资料
 
 - [pep8](https://www.python.org/dev/peps/pep-0008/)

@@ -21,3 +21,7 @@ cargo update
 ```
 vi ~/.cargo/config
 ```
+
+## Reference
+
+- https://docs.rs/chrono/0.4.20/chrono/struct.DateTime.html#method.format

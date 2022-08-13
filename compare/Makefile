@@ -7,8 +7,10 @@ default:
 	mkdir -p bin
 	gcc -O2 -o bin/c hello.c
 	g++ -O2 -o bin/cpp hello.cpp
-	cargo build --release
+	cargo build
 	cp -f target/release/rust bin/rust
+	cargo build --release
+	cp -f target/release/rust bin/rust.release
 	nim c -d:release -o:bin/nim -r hello.nim
 	zig build-exe -O ReleaseSmall --name zig hello.zig
 	mv ./zig bin/
@@ -18,6 +20,8 @@ default:
 	# fpc -Os hello.pas
 	# ghc hello.hs
 	# gdc -Os -o hello hello.d
+
+	ls -lh bin
 
 	ls -lh bin
 

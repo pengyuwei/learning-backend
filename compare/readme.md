@@ -20,6 +20,7 @@
 17K 	 cpp
 78K 	 zig
 91K 	 nim
+159K 	 rust.release
 1.7M 	 go
 9.6M 	 rust
 ```

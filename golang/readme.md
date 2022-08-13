@@ -37,6 +37,7 @@ go build sample.go
 - https://www.runoob.com/go/go-tutorial.html
 - http://c.biancheng.net/view/61.html
 - https://www.runoob.com/go/go-structures.html
+- https://go.dev/
 
 在线运行环境
 - https://play.golang.org/
