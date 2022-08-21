@@ -10,6 +10,7 @@ target
 *.pem
 Cargo.lock
 compare/bin
+compare/Cargo.toml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
