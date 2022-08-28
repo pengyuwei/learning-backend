@@ -5,10 +5,16 @@ all : default
 
 default:
 	mkdir -p bin
-	gcc -O2 -o bin/c hello.c
-	g++ -O2 -o bin/cpp hello.cpp
+	gcc -Wall -g -o bin/c.debug hello.c
+	gcc -O1 -o bin/c.O1 hello.c
+	gcc -O2 -o bin/c.O2 hello.c
+	gcc -O4 -o bin/c.O4 hello.c
+	g++ -Wall -g -o bin/cpp.debug hello.cpp
+	g++ -O1 -o bin/cpp.O1 hello.cpp
+	g++ -O2 -o bin/cpp.O2 hello.cpp
+	g++ -O4 -o bin/cpp.O4 hello.cpp
 	cargo build
-	cp -f target/release/rust bin/rust
+	cp -f target/debug/rust bin/rust.debug
 	cargo build --release
 	cp -f target/release/rust bin/rust.release
 	nim c -d:release -o:bin/nim -r hello.nim
