@@ -21,8 +21,10 @@ cargo update
 
 ## 更换国内源
 
+~/.cargo/config
+
 ```
-vi ~/.cargo/config
+wget http://www.memcd.com/conf/rust/cargo/config
 ```
 
 ## Reference
