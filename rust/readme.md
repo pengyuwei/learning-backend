@@ -1,6 +1,11 @@
-Rust
+# Rust
 
-# environment
+## Catalogue
+
+- ProgrammingRust: 《Programming Rust》的学习；
+- trpl: 《The Rust Programming Language》（RUST权威指南）的学习
+
+## Environment
 
 Cargo 是 Rust 工具链中内置的构建系统和包管理器。
 
