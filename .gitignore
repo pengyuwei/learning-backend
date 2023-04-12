@@ -11,6 +11,7 @@ target
 Cargo.lock
 compare/bin
 compare/Cargo.toml
+.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
