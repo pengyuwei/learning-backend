@@ -15,7 +15,7 @@ Python学习笔记
 
 除非注明，否则均使用Python2.7
 
-# 基础环境
+## Environment
 
 macOS
 ```
@@ -23,7 +23,20 @@ brew install pycodestyle
 alias pep8='_pycodestyle(){ /Users/pyw/Library/Python/2.7/bin/pycodestyle $1;}; _pycodestyle'
 ```
 
-# 常用
+## Virtual environments
+
+```
+sudo apt install python3.10-venv
+mkdir -p venv
+cd venv
+python3 -m venv .
+cd bin
+source activate
+pip install torch --extra-index-url https://download.pytorch.org/whl/cu113
+deactivate
+```
+
+## 常用
 
 ```
 __bases__：以元组返回一个类所直接继承的类。
@@ -34,7 +47,7 @@ __subclasses__()：以列表的返回类的子类。
 __builtins__：内建函数
 ```
 
-# 参考资料
+## Reference
 
 - [pep8](https://www.python.org/dev/peps/pep-0008/)
 - https://docs.python.org/2/library/json.html

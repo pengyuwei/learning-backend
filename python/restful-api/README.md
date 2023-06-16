@@ -1,7 +1,7 @@
 # Restful-API
 
 Python Restful-API框架
-- Flask（本例使用）
+- Flask
 - Django REST Framework (DRF)
 
 ## 开发环境
