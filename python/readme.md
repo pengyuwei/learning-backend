@@ -12,6 +12,7 @@ Python学习笔记
 - [mongodb](mongodb)：使用pymongo访问mongodb
 - [restful-api](restful-api)：使用Flask构建Restful API
 - [weibo](weibo): 调用新浪微博API
+- [abnormal](abnormal): 异常数据检测
 
 除非注明，否则均使用Python2.7
 
