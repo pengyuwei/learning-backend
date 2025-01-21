@@ -43,3 +43,4 @@ Z-score方法检测到 4 个异常值
 索引: 71, 值: 239.86
 ```
 
+![](zscore_anomalies.png)
