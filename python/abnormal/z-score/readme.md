@@ -76,6 +76,15 @@ Z 分数的意义：
         - savefig：保存图形，用于保存绘制的图形
         - close：关闭图形，用于关闭绘制的图形
 
+## 运行环境
+
+```
+sudo apt install python3-venv
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
 ## 输入和输出
 
 ```
