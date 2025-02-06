@@ -1,3 +1,17 @@
+---
+html:
+  embed_local_images: true
+  embed_svg: true
+  offline: true
+  toc: true
+export_on_save:
+  html: true
+toc:
+  depth_from: 1
+  depth_to: 4
+  ordered: false
+---
+
 # Z分数异常数据检测方法
 
 Z 分数异常检测 是一种基于统计学的异常检测方法，通过计算数据点的 Z 分数（Z-score） 来判断其是否为异常值。Z 分数反映了数据点与数据集均值之间的偏离程度，以标准差为单位。
