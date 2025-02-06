@@ -25,7 +25,7 @@ def load_data(file_path):
 def detect_anomalies_zscore(data, threshold=3):
     scaler = StandardScaler()
     z_scores = scaler.fit_transform(data.reshape(-1, 1))
-    return (abs(z_scores) > threshold).ravel()
+    return (abs(z_scores) > threshold).ravel() # [True, False, False, False, True...]
 
 def plot_results(data, anomalies, output_path='zscore_anomalies.png'):
     plt.figure(figsize=(15, 5))
